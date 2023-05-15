@@ -1,0 +1,2 @@
+class OptionalHeaderParseError(Exception):
+    pass

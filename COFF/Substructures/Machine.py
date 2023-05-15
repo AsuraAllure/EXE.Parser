@@ -1,12 +1,14 @@
+import pathlib
 from functools import reduce
+from pathlib import Path
 
 
 class Machine:
     def __init__(self, code):
         self.value = None
         self.map = dict()
-        filename = ("C:\\Users\\Пользователь\\Desktop\\Предметы" +
-                    "\\Питон\\EXE\\COFF\\Substructures\\MachineMapping.txt")
+        filename = Path(pathlib.Path.cwd(), 'COFF', 'Substructures', 'MachineMapping.txt')
+
         with open(filename, 'r') as file:
             for line in file:
                 line = line.split()
@@ -16,7 +18,6 @@ class Machine:
 
     def __str__(self):
         return self.value
-
 
 if __name__ == "__main__":
     assert (Machine("0").value != "The content of this field is assumed to be applicable to any machine type")

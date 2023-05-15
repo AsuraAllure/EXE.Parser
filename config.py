@@ -1,3 +1,3 @@
-left_bound_raw = 40
+left_bound_raw = 60
 
 

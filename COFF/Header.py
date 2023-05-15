@@ -15,29 +15,28 @@ COFF Header.
 class COFFHeader:
     def __init__(self):
         self.empty = True
-        self.fields = {
-            "mch": None,
-            "nsec": None,
-            "tds": None,
-            "ptr": None,
-            "nsb": None,
-            "soh": None,
-            "char": None
-        }
+        self.mch = None
+        self.nsec = None
+        self.tds = None
+        self.ptr = None
+        self.nsb = None
+        self.soh = None
+        self.char = None
 
     def __str__(self):
-        to_string = (addition_space("Type target machine:")
-                     + str(self.fields["mch"]) + '\n')
+        to_string = "\tCOFF Header:\n"
+        to_string += (addition_space("Type target machine:")
+                     + str(self.mch) + '\n')
         to_string += (addition_space("Count of section:")
-                      + self.fields["nsec"] + '\n')
+                      + self.nsec.upper() + '\n')
         to_string += (addition_space("TimeDataStamp:")
-                      + str(self.fields["tds"]) + '\n')
+                      + str(self.tds) + '\n')
         to_string += (addition_space("Pointer to Symbol table:")
-                      + self.fields["ptr"] + '\n')
+                      + self.ptr.upper() + '\n')
         to_string += (addition_space("Number Symbols:")
-                      + self.fields["nsb"] + '\n')
+                      + self.nsb.upper() + '\n')
         to_string += (addition_space("Size option header:")
-                      + str(self.fields["soh"]) + '\n')
+                      + self.soh.upper() + '\n')
         to_string += (addition_space("Flags:") + '\n'
-                      + str(self.fields["char"]) + '\n')
+                      + str(self.char) + '\n')
         return to_string

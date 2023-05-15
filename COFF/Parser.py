@@ -17,16 +17,17 @@ class COFFParser:
         data = self.file.read(4)
         if data != b"PE\x00\x00":
             raise NotPeFormat
-        self.header.fields["mch"] = Machine(convert_to_hex(self.file.read(2)))
-        self.header.fields["nsec"] = convert_to_hex(self.file.read(2))
-        self.header.fields["tds"] = TimeDateStamp(self.file.read(4))
-        self.header.fields["ptr"] = convert_to_hex(self.file.read(4))
-        self.header.fields["nsb"] = convert_to_hex(self.file.read(4))
-        self.header.fields["soh"] = int(convert_to_hex(self.file.read(2)), 16)
-        self.header.fields["char"] = Characteristic(int(convert_to_hex(self.file.read(2)), 16))
+        self.header.mch = Machine(convert_to_hex(self.file.read(2)))
+        self.header.nsec = convert_to_hex(self.file.read(2))
+        self.header.tds = TimeDateStamp(self.file.read(4))
+        self.header.ptr = convert_to_hex(self.file.read(4))
+        self.header.nsb = convert_to_hex(self.file.read(4))
+        self.header.soh = convert_to_hex(self.file.read(2))
+        self.header.char = Characteristic(int(convert_to_hex(self.file.read(2)), 16))
         return self.header
 
     def get_header(self):
         if self.header.empty:
             self.build_header()
         return self.header
+

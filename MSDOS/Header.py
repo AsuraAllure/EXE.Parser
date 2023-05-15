@@ -24,54 +24,50 @@ E	ss;		        - начальное  относительное значение
 3C	pe_offset;		- адрес в файле нового .exe заголовка (COFF)
 """
 
-
-
 class MSDOSHeader:
     def __init__(self):
-        self.fields = {
-            "magic": None,
-            "cblp": None,
-            "cp": None,
-            "crlc": None,
-            "cparhdr": None,
-            "minalloc": None,
-            "maxalloc": None,
-            "ss": None,
-            "sp": None,
-            "csum": None,
-            "ip": None,
-            "cs": None,
-            "lfarlc": None,
-            "ovno": None,
-            "oemid": None,
-            "oeminfo": None,
-            "pe_offset": None
-        }
+        self.magic = None
+        self.cblp = None
+        self.cp = None
+        self.crlc = None
+        self.cparhdr = None
+        self.minalloc = None
+        self.maxalloc = None
+        self.ss = None
+        self.sp = None
+        self.csum = None
+        self.ip = None
+        self.cs = None
+        self.lfarlc = None
+        self.ovno = None
+        self.oemid = None
+        self.oeminfo = None
+        self.pe_offset = None
         self.empty = True
 
     def get_raw(self, field, spec):
-        value = (str(convert_to_hex(self.fields[field]))
+        value = (field
                  .upper()
                  .replace("X", 'x', 1))
         return addition_space(spec) + value + "\n"
 
     def __str__(self):
         to_print = "\tMSDOS Header:\n"
-        to_print += self.get_raw("magic", "Magic number:")
-        to_print += self.get_raw("cblp", "Bytes on last page:")
-        to_print += self.get_raw("cp", "Count page:")
-        to_print += self.get_raw("crlc", "Count relocations:")
-        to_print += self.get_raw("cparhdr", "Paragraphs in header:")
-        to_print += self.get_raw("minalloc", "Minimum memory:")
-        to_print += self.get_raw("maxalloc", "Maximum memory:")
-        to_print += self.get_raw("ss", "Start offset SS register:")
-        to_print += self.get_raw("sp", "Start offset SP register:")
-        to_print += self.get_raw("csum", "Control summ:")
-        to_print += self.get_raw("ip", "Start offset IP register:")
-        to_print += self.get_raw("cs", "Start offset CS register:")
-        to_print += self.get_raw("lfarlc", "Relocations table address:")
-        to_print += self.get_raw("ovno", "Overlay number:")
-        to_print += self.get_raw("oemid", "Overlay identification:")
-        to_print += self.get_raw("oeminfo", "Overlay information:")
-        to_print += self.get_raw("pe_offset", "Address COFF header:")
+        to_print += self.get_raw(self.magic, "Magic number:")
+        to_print += self.get_raw(self.cblp, "Bytes on last page:")
+        to_print += self.get_raw(self.cp,  "Count page:")
+        to_print += self.get_raw(self.crlc, "Count relocations:")
+        to_print += self.get_raw(self.cparhdr, "Paragraphs in header:")
+        to_print += self.get_raw(self.minalloc, "Minimum memory:")
+        to_print += self.get_raw(self.maxalloc, "Maximum memory:")
+        to_print += self.get_raw(self.ss, "Start offset SS register:")
+        to_print += self.get_raw(self.sp, "Start offset SP register:")
+        to_print += self.get_raw(self.csum, "Control summ:")
+        to_print += self.get_raw(self.ip, "Start offset IP register:")
+        to_print += self.get_raw(self.cs, "Start offset CS register:")
+        to_print += self.get_raw(self.lfarlc, "Relocations table address:")
+        to_print += self.get_raw(self.ovno, "Overlay number:")
+        to_print += self.get_raw(self.oemid, "Overlay identification:")
+        to_print += self.get_raw(self.oeminfo, "Overlay information:")
+        to_print += self.get_raw(self.pe_offset, "Address COFF header:")
         return to_print
