@@ -1,4 +1,4 @@
-from utility import addition_space
+from utility import addition_space, get_raw
 from utility import convert_to_hex
 
 """
@@ -52,22 +52,10 @@ class MSDOSHeader:
         return addition_space(spec) + value + "\n"
 
     def __str__(self):
-        to_print = "\tMSDOS Header:\n"
-        to_print += self.get_raw(self.magic, "Magic number:")
-        to_print += self.get_raw(self.cblp, "Bytes on last page:")
-        to_print += self.get_raw(self.cp,  "Count page:")
-        to_print += self.get_raw(self.crlc, "Count relocations:")
-        to_print += self.get_raw(self.cparhdr, "Paragraphs in header:")
-        to_print += self.get_raw(self.minalloc, "Minimum memory:")
-        to_print += self.get_raw(self.maxalloc, "Maximum memory:")
-        to_print += self.get_raw(self.ss, "Start offset SS register:")
-        to_print += self.get_raw(self.sp, "Start offset SP register:")
-        to_print += self.get_raw(self.csum, "Control summ:")
-        to_print += self.get_raw(self.ip, "Start offset IP register:")
-        to_print += self.get_raw(self.cs, "Start offset CS register:")
-        to_print += self.get_raw(self.lfarlc, "Relocations table address:")
-        to_print += self.get_raw(self.ovno, "Overlay number:")
-        to_print += self.get_raw(self.oemid, "Overlay identification:")
-        to_print += self.get_raw(self.oeminfo, "Overlay information:")
-        to_print += self.get_raw(self.pe_offset, "Address COFF header:")
-        return to_print
+        res = "\tMSDOS Header:\n"
+
+        st = vars(self).items()
+        for (spec, field) in st:
+            if spec != 'empty':
+                res += get_raw(field, spec.lower() + ":", 0)
+        return res
