@@ -1,13 +1,13 @@
 import argparse
-from MSDOS.Parser import MSDOSParser
-from COFF.Parser import COFFParser
-from Optional.Parser import OptionalParser
-from TableSections.Parser import SectionTableParser
-from ImportTable.Parser import ImportTableParser
+from MSDOS.parser import MSDOSParser
+from COFF.parser import COFFParser
+from optional.parser import OptionalParser
+from table_sections.parser import SectionTableParser
+from import_table.parser import ImportTableParser
 
-from MSDOS.NotExeException import NotExeFileException
-from COFF.NotPEFormatException import NotPeFormat
-from Optional.Errors import OptionalHeaderParseError
+from MSDOS.not_exe_exception import NotExeFileException
+from COFF.not_PE_format_exception import NotPeFormat
+from optional.errors import OptionalHeaderParseError
 from RVA_calculator import NO_SECTION_EXCEPTION
 
 from RVA_calculator import RVACalculator
@@ -43,9 +43,8 @@ def dumping(dump_file):
         import_table_bytes = dump_file.read(int(import_table_section.size, 16))
 
         import_table_parser = ImportTableParser(import_table_bytes)
-        import_table = import_table_parser.get_table()
+        print(import_table_bytes)
 
-        print(import_table)
 
     except NotExeFileException:
         print("File not executable")

@@ -1,5 +1,5 @@
-from MSDOS.Header import MSDOSHeader
-from MSDOS.NotExeException import NotExeFileException
+from MSDOS.header import MSDOSHeader
+from MSDOS.not_exe_exception import NotExeFileException
 from utility import convert_to_hex
 
 class MSDOSParser:

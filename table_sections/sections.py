@@ -1,4 +1,4 @@
-from TableSections.Characteristics import Characteristics
+from table_sections.characteristics import Characteristics
 from utility import convert_to_hex, get_raw
 
 

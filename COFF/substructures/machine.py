@@ -7,7 +7,7 @@ class Machine:
     def __init__(self, code):
         self.value = None
         self.map = dict()
-        filename = Path(pathlib.Path.cwd(), 'COFF', 'Substructures', 'MachineMapping.txt')
+        filename = Path(pathlib.Path.cwd(), 'COFF', 'substructures', 'machine_mapping.txt')
 
         with open(filename, 'r') as file:
             for line in file:

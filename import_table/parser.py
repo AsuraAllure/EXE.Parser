@@ -1,5 +1,5 @@
 from utility import convert_to_hex
-from COFF.Substructures.TimeDateStamp import TimeDateStamp
+from COFF.substructures.time_date_stamp import TimeDateStamp
 
 class ImportTableParser:
     def __init__(self, data):

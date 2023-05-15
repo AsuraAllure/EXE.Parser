@@ -1,4 +1,4 @@
-from TableSections.Sections import Section
+from table_sections.sections import Section
 
 
 class SectionTableParser:

@@ -1,9 +1,9 @@
-from COFF.NotPEFormatException import NotPeFormat
-from COFF.Header import COFFHeader
+from COFF.not_PE_format_exception import NotPeFormat
+from COFF.header import COFFHeader
 from utility import convert_to_hex
-from COFF.Substructures.Machine import Machine
-from COFF.Substructures.TimeDateStamp import TimeDateStamp
-from COFF.Substructures.Characteristic import Characteristic
+from COFF.substructures.machine import Machine
+from COFF.substructures.time_date_stamp import TimeDateStamp
+from COFF.substructures.characteristic import Characteristic
 
 
 class COFFParser:

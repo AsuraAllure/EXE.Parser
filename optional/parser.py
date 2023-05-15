@@ -1,8 +1,8 @@
-from Optional.Header import *
-from Optional.Substructures.Data import *
-from Optional.Substructures.Standarts import *
-from Optional.Substructures.WindowsSpecific import *
-from Optional.Errors import *
+from optional.header import *
+from optional.substructures.data import *
+from optional.substructures.standarts import *
+from optional.substructures.windows_specific import *
+from optional.errors import *
 from utility import convert_to_hex
 
 
