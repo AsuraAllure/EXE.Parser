@@ -1,5 +1,5 @@
 from table_sections.characteristics import Characteristics
-from utility import convert_to_hex, get_raw
+from utility import convert_to_hex, get_raw, get_raw_lower_value
 
 
 class Section:
@@ -20,6 +20,6 @@ class Section:
         res = "Section:\n"
         for (spec, field) in st:
             if spec != "characteristics":
-                res += get_raw(field, spec+":", 1)
+                res += get_raw_lower_value(field, spec, 1)
         return res + str(self.characteristics)
 

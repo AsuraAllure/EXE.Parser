@@ -57,5 +57,5 @@ class MSDOSHeader:
         st = vars(self).items()
         for (spec, field) in st:
             if spec != 'empty':
-                res += get_raw(field, spec.lower() + ":", 0)
+                res += get_raw(field, spec.lower() , 0)
         return res

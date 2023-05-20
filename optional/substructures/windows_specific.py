@@ -38,8 +38,6 @@ class WindowsSpecific32Fields:
 
         return res
 
-
-
 class WindowsSpecific64Fields:
     def __init__(self, file):
         self.image_base = convert_to_hex(file.read(8))

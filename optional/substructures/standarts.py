@@ -18,7 +18,7 @@ class Standart32:
         st = vars(self).items()
         res = "\n"
         for (spec, field) in st:
-            res += get_raw(field, spec.lower() + ":", 1)
+            res += get_raw(field, spec.lower(), 1)
         return res
 
 

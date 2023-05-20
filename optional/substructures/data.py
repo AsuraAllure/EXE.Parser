@@ -28,7 +28,7 @@ class ImageDataDirectory:
         return addition_space(spec) + value + "\n"
 
     def __str__(self):
-        st ="\tDIR:\n" +  self.get_raw(self.virtual_address, "    \tVirtual Address:")
-        st += self.get_raw(self.size, "    \tSize:")[:-1]
+        st ="\tDIR:\n" +  self.get_raw(self.virtual_address, "    Virtual Address:")
+        st += self.get_raw(self.size, "    Size:")[:-1]
         return st
 
