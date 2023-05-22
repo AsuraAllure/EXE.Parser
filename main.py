@@ -1,10 +1,14 @@
 import argparse
+import os
+
 from MSDOS.parser import MSDOSParser
 from COFF.parser import COFFParser
-from export_table.parser import ExportDirectoriesTable, ExportTableParser
+from code_parser.pars import parse_code
+from export_table.parser import ExportTableParser
 from optional.parser import OptionalParser
 from table_sections.parser import SectionTableParser
 from import_table.parser import ImportTableParser
+from pathlib import Path
 
 from MSDOS.not_exe_exception import NotExeFileException
 from COFF.not_PE_format_exception import NotPeFormat
@@ -13,13 +17,8 @@ from RVA_calculator import NO_SECTION_EXCEPTION
 
 from RVA_calculator import RVACalculator
 
-
 def dumping(dump_file):
     try:
-
-        #file.seek(int("0x8E20", 16))
-        #print(file.read(100))
-
         msdos_parser = MSDOSParser(dump_file)
         msdos_header = msdos_parser.get_header()
         print(msdos_header)
@@ -52,6 +51,7 @@ def dumping(dump_file):
             print(export_table_parser)
 
         import_table_section = optional_header.data.directories[1]
+
         if import_table_section.size == "0x0":
             print("No Import Table\n")
         else:
@@ -66,6 +66,31 @@ def dumping(dump_file):
             )
             print(import_table_parser)
 
+        base_code = int(optional_header.standart.base_code, 16)
+        size_code = int(rva_calc.get_size_section_by_rva(base_code),16)
+
+        offset_code = rva_calc.resolve(base_code)
+
+        file.seek(offset_code)
+
+        bin_dir_path = Path(
+            os.path.join(
+                os.path.dirname(__file__),
+                'bin'
+            )
+        )
+        if not bin_dir_path.exists():
+            os.mkdir(bin_dir_path)
+
+        bin_file_path = Path(
+            os.path.join(
+                bin_dir_path,
+                filename + '.txt'
+            )
+        )
+
+        with open(bin_file_path, 'w') as bin_file:
+            parse_code(file, bin_file, size_code)
 
     except NotExeFileException:
         print("File not executable")
@@ -75,6 +100,9 @@ def dumping(dump_file):
         print(e)
     except NO_SECTION_EXCEPTION:
         print("Dont search sections")
+    except FileNotFoundError:
+        print("Cant create text_bin file")
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -89,10 +117,10 @@ if __name__ == '__main__':
         type=str
     )
 
-    #args = vars(parser.parse_args())
-    #filename = args["filename"][0]
+    # args = vars(parser.parse_args())
+    # filename = args["filename"][0]
     filename = "sqlceqp35.dll"
-    #filename = "hiew32.exe"
+    # filename = "hiew32.exe"
     try:
         file = open(filename, 'rb')
     except FileNotFoundError:

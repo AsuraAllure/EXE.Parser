@@ -6,8 +6,12 @@ class RVACalculator:
     def __init__(self, table):
         self.table = table
 
-    def resolve(self, RVA):
+    def get_size_section_by_rva(self, RVA):
+        for section in self.table:
+            if int(section.virtual_address, 16) + int(section.virtual_size, 16) > RVA >= int(section.virtual_address,                                                                         16):
+                return section.virtual_size
 
+    def resolve(self, RVA):
         for section in self.table:
             if int(section.virtual_address, 16) + int(section.virtual_size, 16) > RVA >= int(section.virtual_address, 16):
                 return RVA - int(section.virtual_address, 16) + int(section.pointer_raw_data, 16)

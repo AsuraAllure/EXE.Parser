@@ -1,3 +1,4 @@
+import os
 import pathlib
 from functools import reduce
 from pathlib import Path
@@ -7,7 +8,7 @@ class Machine:
     def __init__(self, code):
         self.value = None
         self.map = dict()
-        filename = Path(pathlib.Path.cwd(), 'COFF', 'substructures', 'machine_mapping.txt')
+        filename = Path(os.path.join(os.path.dirname(__file__)), 'machine_mapping.txt')
 
         with open(filename, 'r') as file:
             for line in file:
